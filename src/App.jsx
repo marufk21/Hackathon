@@ -70,7 +70,7 @@ function App() {
         <Route path="/" element={<ListPage />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/3" element={<Root />} />
-        <Route path="/detail-page" element={<DetailPage />} />
+        <Route path="/detail-page/:index" element={<DetailPage />} />
       </Routes>
     </>
   );

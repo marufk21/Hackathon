@@ -6,7 +6,7 @@ const GroupComponent3 = ({ className = "" }) => {
   const navigate = useNavigate();
 
   const onGroupContainerClick = useCallback(() => {
-    navigate("/detail-page");
+    navigate(`/detail-page/${index}`);
   }, [navigate]);
 
   return (
