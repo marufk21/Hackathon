@@ -1,13 +1,34 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const ChallengeNameInput = ({ className = "" }) => {
   const navigate = useNavigate();
+  
+  const [challengeName, setChallengeName] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+  const [levelType, setLevelType] = useState("Easy");
 
   const onButtonContainerClick = useCallback(() => {
+    const challengeData = {
+      challengeName,
+      startDate,
+      endDate,
+      description,
+      image,
+      levelType,
+    };
+
+    // Store the challenge data in localStorage
+    const existingChallenges = JSON.parse(localStorage.getItem("challenges")) || [];
+    existingChallenges.push(challengeData);
+    localStorage.setItem("challenges", JSON.stringify(existingChallenges));
+
     navigate("/");
-  }, [navigate]);
+  }, [navigate, challengeName, startDate, endDate, description, image, levelType]);
 
   return (
     <div
@@ -18,90 +39,71 @@ const ChallengeNameInput = ({ className = "" }) => {
           <div className="w-[163px] relative font-medium inline-block">
             Challenge Name
           </div>
-          <div className="self-stretch h-[39px] relative rounded-8xs border-silver-200 border-[1px] border-solid box-border" />
+          <input
+            type="text"
+            value={challengeName}
+            onChange={(e) => setChallengeName(e.target.value)}
+            className="self-stretch h-[39px] relative rounded-8xs border-silver-200 border-[1px] border-solid box-border"
+          />
         </div>
         <div className="self-stretch flex flex-col items-start justify-start gap-[19px] max-w-full">
           <div className="w-[163px] relative font-medium inline-block">
             Start Date
           </div>
-          <div className="self-stretch rounded-8xs border-silver-200 border-[1px] border-solid box-border flex flex-row items-start justify-between pt-1.5 pb-[5px] pl-5 pr-[25px] max-w-full gap-5 z-[1] text-gray">
-            <div className="w-[163px] flex flex-col items-start justify-start pt-px px-0 pb-0 box-border">
-              <div className="self-stretch relative z-[2]">Add start date</div>
-            </div>
-            <div className="h-[39px] w-[453px] relative rounded-8xs border-silver-200 border-[1px] border-solid box-border hidden max-w-full" />
-            <img
-              className="h-6 w-6 relative overflow-hidden shrink-0 min-h-[24px]"
-              alt=""
-              src="/uilcalender.svg"
-            />
-          </div>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            className="self-stretch rounded-8xs border-silver-200 border-[1px] border-solid box-border flex flex-row items-start justify-between pt-1.5 pb-[5px] pl-5 pr-[25px] max-w-full gap-5 z-[1] text-gray"
+          />
         </div>
         <div className="self-stretch flex flex-col items-start justify-start gap-[19px] max-w-full">
           <div className="w-[163px] relative font-medium inline-block">
             End Date
           </div>
-          <div className="self-stretch rounded-8xs border-silver-200 border-[1px] border-solid box-border flex flex-row items-start justify-between pt-1.5 pb-[5px] pl-5 pr-[25px] max-w-full gap-5 z-[1] text-gray">
-            <div className="w-[163px] flex flex-col items-start justify-start pt-px px-0 pb-0 box-border">
-              <div className="self-stretch relative z-[2]">Add end date</div>
-            </div>
-            <div className="h-[39px] w-[453px] relative rounded-8xs border-silver-200 border-[1px] border-solid box-border hidden max-w-full" />
-            <img
-              className="h-6 w-6 relative overflow-hidden shrink-0 min-h-[24px]"
-              alt=""
-              src="/uilcalender.svg"
-            />
-          </div>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="self-stretch rounded-8xs border-silver-200 border-[1px] border-solid box-border flex flex-row items-start justify-between pt-1.5 pb-[5px] pl-5 pr-[25px] max-w-full gap-5 z-[1] text-gray"
+          />
         </div>
       </div>
       <div className="self-stretch flex flex-col items-start justify-start gap-[19px]">
         <div className="w-[163px] relative font-medium inline-block">
           Description
         </div>
-        <div className="self-stretch h-[252px] relative">
-          <div className="absolute top-[0px] left-[0px] rounded-8xs border-silver-200 border-[1px] border-solid box-border w-full h-full">
-            <div className="absolute top-[0px] left-[0px] rounded-8xs border-silver-200 border-[1px] border-solid box-border w-full h-full hidden" />
-            <img
-              className="absolute top-[236px] left-[798px] w-[12.8px] h-[12.6px] overflow-hidden object-contain z-[1]"
-              alt=""
-              src="/bitrianglefill@2x.png"
-            />
-          </div>
-        </div>
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="self-stretch h-[252px] relative rounded-8xs border-silver-200 border-[1px] border-solid box-border"
+        />
       </div>
       <div className="w-[236px] flex flex-col items-start justify-start pt-0 px-0 pb-3 box-border gap-[41px]">
         <div className="flex flex-col items-start justify-start gap-[19px]">
           <div className="w-[186px] relative font-medium inline-block">
             Image
           </div>
-          <div className="rounded-8xs bg-whitesmoke-100 border-gainsboro-200 border-[1px] border-solid flex flex-row items-start justify-start pt-[11px] px-[72px] pb-2.5 gap-0.5 text-lg text-dimgray">
-            <div className="h-[47px] w-[236px] relative rounded-8xs bg-whitesmoke-100 border-gainsboro-200 border-[1px] border-solid box-border hidden" />
-            <div className="relative font-medium inline-block min-w-[66px] z-[1]">
-              Upload
-            </div>
-            <img
-              className="h-[22px] w-[22px] relative overflow-hidden shrink-0 min-h-[22px] z-[1]"
-              alt=""
-              src="/bxscloudupload.svg"
-            />
-          </div>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0]?.name || "")}
+            className="rounded-8xs bg-whitesmoke-100 border-gainsboro-200 border-[1px] border-solid flex flex-row items-start justify-start pt-[11px] px-[72px] pb-2.5 gap-0.5 text-lg text-dimgray"
+          />
         </div>
         <div className="self-stretch flex flex-col items-start justify-start gap-[19px]">
           <div className="w-[163px] relative font-medium inline-block">
             Level Type
           </div>
-          <div className="self-stretch rounded-8xs border-silver-200 border-[1px] border-solid flex flex-row items-start justify-between py-[7px] pl-[21px] pr-[22px] gap-5 z-[1] text-sm">
-            <div className="w-[71px] relative font-medium inline-block shrink-0">
-              Easy
-            </div>
-            <div className="h-[39px] w-[236px] relative rounded-8xs border-silver-200 border-[1px] border-solid box-border hidden" />
-            <div className="flex flex-col items-start justify-start pt-1.5 px-0 pb-0">
-              <img
-                className="w-3 h-2 relative z-[1]"
-                alt=""
-                src="/level-icon.svg"
-              />
-            </div>
-          </div>
+          <select
+            value={levelType}
+            onChange={(e) => setLevelType(e.target.value)}
+            className="self-stretch rounded-8xs border-silver-200 border-[1px] border-solid flex flex-row items-start justify-between py-[7px] pl-[21px] pr-[22px] gap-5 z-[1] text-sm"
+          >
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
         </div>
       </div>
       <div
@@ -110,14 +112,6 @@ const ChallengeNameInput = ({ className = "" }) => {
       >
         <div className="relative leading-[21px] font-medium">
           Create Challenge
-        </div>
-        <img
-          className="h-[10.6px] w-[11px] relative hidden"
-          alt=""
-          src="/iconfilter.svg"
-        />
-        <div className="overflow-hidden hidden flex-col items-start justify-start py-0.5 px-0 box-border w-[px] h-[px]">
-          <img className="w-3 h-2 relative" alt="" src="/vector-1.svg" />
         </div>
       </div>
     </div>
