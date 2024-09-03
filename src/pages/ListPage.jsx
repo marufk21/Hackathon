@@ -3,11 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FrameComponent6 from "../components/FrameComponent6";
 import FrameComponent5 from "../components/FrameComponent5";
 import GroupComponent1 from "../components/GroupComponent1";
-import MobileHeader from "../components/MobileHeader";
-import FrameComponent7 from "../components/FrameComponent7";
-import SessionContainer from "../components/SessionContainer";
-import GroupComponent from "../components/GroupComponent";
-import FAQ from "../components/FAQ";
+
 
 const ListPage = () => {
   const navigate = useNavigate();
@@ -127,102 +123,7 @@ const ListPage = () => {
           <FrameComponent5 />
           <GroupComponent1 />
         </div>
-        <div className="h-[1517px] w-[414px] flex flex-col items-start justify-start pt-[643px] px-0 pb-0 box-border max-w-full shrink-0 mq450:h-auto mq1350:pt-20 mq1350:box-border">
-          <div className="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start pt-0 px-0 pb-[4444px] box-border shrink-0 max-w-full mq450:pb-[516px] mq450:box-border mq1125:pb-[794px] mq1125:box-border mq1350:pb-[1221px] mq1350:box-border">
-            <MobileHeader
-              cihamburger="/cihamburger.svg"
-              mainLogoWithDarktextDphi1="/main-logo-with-darktext-dphi-1@2x.png"
-            />
-            <div className="self-stretch flex flex-row items-start justify-start pt-0 px-0 pb-[53px] box-border max-w-full text-left text-xl font-body-b3-regular mq450:pb-[34px] mq450:box-border">
-              <div className="h-[395px] flex-1 bg-black flex flex-col items-start justify-start pt-[45px] pb-[46px] pl-[47px] pr-[41px] box-border gap-[33px] max-w-full mq450:gap-4 mq450:pl-5 mq450:box-border mq800:pt-20 mq800:pb-[30px] mq800:box-border">
-                <div className="w-[414px] h-[395px] relative bg-black hidden max-w-full" />
-                <FrameComponent7
-                  group="/group.svg"
-                  antDesignfundViewOutlined="/antdesignfundviewoutlined.svg"
-                />
-                <div className="w-px h-[323px] relative bg-darkslategray-300 [transform:_rotate(-90deg)] shrink-0 z-[1]" />
-                <div className="w-[246px] flex flex-row items-start justify-start py-0 px-[43px] box-border">
-                  <div className="flex-1 flex flex-row items-start justify-start gap-[22px]">
-                    <img
-                      className="h-[55px] w-[55px] relative z-[1]"
-                      alt=""
-                      src="/group-1000002518-1.svg"
-                    />
-                    <div className="flex-1 flex flex-col items-start justify-start pt-2 px-0 pb-0">
-                      <div className="self-stretch flex flex-col items-start justify-start gap-0.5">
-                        <b className="self-stretch relative leading-[20px] z-[1] mq450:text-base mq450:leading-[16px]">
-                          50+
-                        </b>
-                        <div className="self-stretch h-[17px] relative text-base leading-[17px] font-medium inline-block shrink-0 z-[1]">
-                          Speakers
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="self-stretch flex flex-row items-start justify-start pt-0 pb-[35px] pl-[54px] pr-[53px] text-black mq450:pl-5 mq450:pr-5 mq450:box-border">
-              <h2 className="m-0 flex-1 relative text-inherit leading-[40px] font-semibold font-[inherit] mq450:text-lgi mq450:leading-[32px]">
-                Upcoming Session
-              </h2>
-            </div>
-            <SessionContainer
-              coolicon="/coolicon.svg"
-              antDesigncalendarOutlined="/antdesigncalendaroutlined.svg"
-              sessionImage="/session-image@2x.png"
-              charmcircleTick="/charmcircletick.svg"
-            />
-            <div className="self-stretch flex flex-row items-start justify-start pt-0 px-0 pb-9 box-border max-w-full">
-              <div className="flex-1 bg-darkslategray-300 flex flex-col items-end justify-start pt-[37px] px-[30px] pb-[66px] box-border gap-[43px] max-w-full mq450:gap-[21px] mq450:pb-5 mq450:box-border mq1125:pb-7 mq1125:box-border mq1350:pt-20 mq1350:pb-[43px] mq1350:box-border">
-                <div className="w-[414px] h-[1629px] relative bg-darkslategray-300 hidden max-w-full" />
-                <div className="self-stretch flex flex-row items-start justify-end py-0 pl-0 pr-px box-border max-w-full">
-                  <h2 className="m-0 h-10 flex-1 relative text-inherit leading-[40px] font-semibold font-[inherit] flex items-center justify-center max-w-full z-[1] mq450:text-lgi mq450:leading-[32px]">
-                    Explore Past Sessions
-                  </h2>
-                </div>
-                <div className="self-stretch flex flex-col items-start justify-start pt-0 px-0 pb-[26px] gap-[43px] mq450:gap-[21px]">
-                  <GroupComponent />
-                  <GroupComponent />
-                  <GroupComponent />
-                </div>
-                <div className="self-stretch h-[49px] flex flex-row items-start justify-center text-base text-darkslategray-300 font-body-b3-regular">
-                  <div className="self-stretch w-[184px] rounded-3xs bg-white flex flex-row items-start justify-start pt-4 px-[37px] pb-[14.9px] box-border z-[1]">
-                    <div className="h-[49px] w-[184px] relative rounded-3xs bg-white hidden" />
-                    <div className="self-stretch w-[106px] rounded-3xs flex flex-row items-start justify-start py-0 pl-0 pr-[13px] box-border relative z-[2]">
-                      <div className="self-stretch flex-1 relative leading-[0%] font-semibold flex items-center justify-center">
-                        View All
-                      </div>
-                      <img
-                        className="h-1.5 w-[13px] absolute !m-[0] right-[0px] bottom-[6px]"
-                        alt=""
-                        src="/caret-1.svg"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="self-stretch flex flex-row items-start justify-center pt-0 pb-[22px] pl-6 pr-5 text-black">
-              <h2 className="m-0 h-[46px] w-[212px] relative text-inherit leading-[24px] font-bold font-[inherit] flex items-center justify-center shrink-0 mq450:text-lgi mq450:leading-[19px]">
-                FAQ’s
-              </h2>
-            </div>
-            <div className="self-stretch h-[553px] flex flex-row items-start justify-start pt-0 pb-[29px] pl-[73px] pr-[69px] box-border mq450:pl-5 mq450:pr-5 mq450:box-border">
-              <FAQ
-                chevronUp="/chevronup.svg"
-                chevronDown="/chevrondown.svg"
-                chevronDown1="/chevrondown.svg"
-                chevronDown2="/chevrondown.svg"
-              />
-            </div>
-            <img
-              className="ml-[-1px] self-stretch h-[627px] relative max-w-full overflow-hidden shrink-0 object-cover"
-              alt=""
-              src="/screenshot-20220520-at-319-1@2x.png"
-            />
-          </div>
-        </div>
+     
       </section>
     </div>
   );

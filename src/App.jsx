@@ -1,9 +1,5 @@
 import { useEffect } from "react";
-import {
-  Routes,
-  Route,
-  useNavigationType,
-  useLocation,
+import {  Routes, Route, useNavigationType, useLocation,
 } from "react-router-dom";
 import Navbar from "./pages/Navbar";
 import ListPage from "./pages/ListPage";
