@@ -4,7 +4,6 @@ import FrameComponent6 from "../components/FrameComponent6";
 import FrameComponent5 from "../components/FrameComponent5";
 import GroupComponent1 from "../components/GroupComponent1";
 
-
 const ListPage = () => {
   const navigate = useNavigate();
 

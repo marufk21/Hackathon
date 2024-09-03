@@ -3,8 +3,8 @@ import {  Routes, Route, useNavigationType, useLocation,
 } from "react-router-dom";
 import Navbar from "./pages/Navbar";
 import ListPage from "./pages/ListPage";
-import Admin from "./pages/Admin";
-import Root from "./pages/Root";
+import AdminForm from "./pages/AdminForm";
+import EditForm from "./pages/EditForm";
 import DetailPage from "./pages/DetailPage";
 
 function App() {
@@ -64,8 +64,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<ListPage />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/3" element={<Root />} />
+        <Route path="/admin" element={<AdminForm />} />
+        <Route path="/3" element={<EditForm />} />
         <Route path="/detail-page/:index" element={<DetailPage />} />
       </Routes>
     </>
