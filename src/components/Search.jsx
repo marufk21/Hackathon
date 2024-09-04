@@ -1,9 +1,12 @@
-import { useState, useCallback } from "react";
-import PropTypes from "prop-types";
-import PortalPopup from "./PortalPopup";
+import { useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import PortalPopup from './PortalPopup';
 
-const Search = ({ className = "" }) => {
+const Search = ({ className = '', onFilterChange }) => {
   const [isFilterOpen, setFilterOpen] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState('All');
+  const [selectedLevel, setSelectedLevel] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const openFilter = useCallback(() => {
     setFilterOpen(true);
@@ -12,6 +15,28 @@ const Search = ({ className = "" }) => {
   const closeFilter = useCallback(() => {
     setFilterOpen(false);
   }, []);
+
+  const handleStatusChange = (status) => {
+    setSelectedStatus(status);
+    console.log('Status changed:', { status, level: selectedLevel, searchTerm });
+    onFilterChange({ status, level: selectedLevel, searchTerm });
+  };
+
+  const handleLevelChange = (level) => {
+    setSelectedLevel(level);
+    console.log({status: selectedStatus, level, searchTerm })
+    onFilterChange({ status: selectedStatus, level, searchTerm });
+  };
+
+  const handleSearchChange = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+    onFilterChange({
+      status: selectedStatus,
+      level: selectedLevel,
+      searchTerm: value,
+    });
+  };
 
   return (
     <>
@@ -26,16 +51,13 @@ const Search = ({ className = "" }) => {
         </div>
         <div className="w-[964px] flex flex-row items-start justify-center gap-[25px] max-w-full text-left text-lg text-b400 font-body-b3-regular mq1125:flex-wrap">
           <div className="flex-1 shadow-[0px_4px_50px_rgba(110,_110,_110,_0.1)] rounded-xl bg-white overflow-hidden flex flex-row items-start justify-start pt-[15px] px-[38px] pb-[17px] box-border gap-3 min-w-[181px] max-w-full z-[3]">
-            <div className="flex flex-col items-start justify-start pt-px px-0 pb-0">
-              <img
-                className="w-[17px] h-[17px] relative overflow-hidden shrink-0"
-                alt=""
-                src="/carbonsearch.svg"
-              />
-            </div>
-            <div className="w-[164px] relative leading-[20px] font-light inline-block shrink-0">
-              Search
-            </div>
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full px-2 py-1 border border-gray-300 rounded"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
           </div>
           <div
             className="w-[110px] rounded-xl bg-white border-whitesmoke-500 border-[1px] border-solid box-border overflow-hidden shrink-0 flex flex-row items-start justify-start py-2.5 pl-[22px] pr-[15px] cursor-pointer z-[3] text-black"
@@ -63,7 +85,6 @@ const Search = ({ className = "" }) => {
             className={`w-[290px] relative flex flex-row items-start justify-start leading-[normal] tracking-[normal] max-w-full max-h-full overflow-auto`}
           >
             <section className="flex-1 shadow-[0px_6px_12px_rgba(221,_230,_237,_0.3)] rounded-3xs bg-white flex flex-col items-start justify-start pt-[26px] pb-[23px] pl-[13px] pr-3 gap-3.5 text-left text-base text-dimgray font-body-b3-regular">
-              <div className="w-[290px] h-[394px] relative shadow-[0px_6px_12px_rgba(221,_230,_237,_0.3)] rounded-3xs bg-white hidden" />
               <div className="self-stretch flex flex-col items-start justify-start gap-[22.8px] text-lg text-black">
                 <div className="w-[251px] flex flex-row items-start justify-start py-0 px-[3px] box-border">
                   <div className="flex-1 flex flex-row items-end justify-between gap-5">
@@ -92,38 +113,36 @@ const Search = ({ className = "" }) => {
               </div>
               <div className="w-[98px] flex flex-row items-start justify-start py-0 px-[3px] box-border text-sm text-b400">
                 <div className="flex-1 flex flex-col items-start justify-start gap-2">
-                  <div className="flex flex-row items-start justify-start py-0 pl-0 pr-5 gap-[9px] cursor-pointer z-[1]">
-                    <div className="flex flex-col items-start justify-start pt-1 px-0 pb-0">
-                      <div className="w-[15px] h-[15px] relative rounded-10xs border-darkslategray-300 border-[1px] border-solid box-border" />
-                    </div>
+                  <div
+                    className="flex flex-row items-start justify-start py-0 pl-0 pr-5 gap-[9px] cursor-pointer z-[1]"
+                    onClick={() => handleStatusChange('All')}
+                  >
                     <div className="relative leading-[23px] inline-block min-w-[17px]">
                       All
                     </div>
                   </div>
-                  <div className="self-stretch flex flex-row items-start justify-start gap-[9px]">
-                    <div className="flex flex-col items-start justify-start pt-1 px-0 pb-0">
-                      <div className="flex flex-col items-start justify-start gap-4">
-                        <div className="w-[15px] h-[15px] relative rounded-10xs border-darkslategray-300 border-[1px] border-solid box-border cursor-pointer z-[1]" />
-                        <div className="w-[15px] h-[15px] relative rounded-10xs border-darkslategray-300 border-[1px] border-solid box-border cursor-pointer z-[1]" />
-                        <div className="w-[15px] h-[15px] relative rounded-10xs border-darkslategray-300 border-[1px] border-solid box-border cursor-pointer z-[1]" />
-                      </div>
+                  <div
+                    className="flex flex-row items-start justify-start py-0 pl-0 pr-[26px] cursor-pointer z-[1]"
+                    onClick={() => handleStatusChange('Active')}
+                  >
+                    <div className="relative leading-[23px] inline-block min-w-[42px]">
+                      Active
                     </div>
-                    <div className="flex-1 flex flex-col items-start justify-start gap-2">
-                      <div className="flex flex-row items-start justify-start py-0 pl-0 pr-[26px] cursor-pointer z-[1]">
-                        <div className="relative leading-[23px] inline-block min-w-[42px]">
-                          Active
-                        </div>
-                      </div>
-                      <div className="flex flex-row items-start justify-start cursor-pointer z-[1]">
-                        <div className="relative leading-[23px] inline-block min-w-[68px]">
-                          Upcoming
-                        </div>
-                      </div>
-                      <div className="flex flex-row items-start justify-start py-0 pl-0 pr-5 cursor-pointer z-[1]">
-                        <div className="relative leading-[23px] inline-block min-w-[30px]">
-                          Past
-                        </div>
-                      </div>
+                  </div>
+                  <div
+                    className="flex flex-row items-start justify-start py-0 pl-0 pr-5 cursor-pointer z-[1]"
+                    onClick={() => handleStatusChange('Upcoming')}
+                  >
+                    <div className="relative leading-[23px] inline-block min-w-[68px]">
+                      Upcoming
+                    </div>
+                  </div>
+                  <div
+                    className="flex flex-row items-start justify-start py-0 pl-0 pr-5 cursor-pointer z-[1]"
+                    onClick={() => handleStatusChange('Past')}
+                  >
+                    <div className="relative leading-[23px] inline-block min-w-[30px]">
+                      Past
                     </div>
                   </div>
                 </div>
@@ -135,36 +154,43 @@ const Search = ({ className = "" }) => {
                 src="/vector-142.svg"
               />
               <div className="flex flex-row items-start justify-start py-0 px-[3px]">
-                <div className="flex flex-row items-start justify-start cursor-pointer z-[1]">
-                  <div className="relative leading-[20px] inline-block min-w-[40px]">
-                    Level
-                  </div>
+                <div className="relative leading-[20px] inline-block min-w-[40px]">
+                  Level
                 </div>
               </div>
               <div className="flex flex-row items-start justify-start py-0 px-[3px] text-sm text-b400">
                 <div className="flex flex-row items-end justify-start gap-[9px]">
                   <div className="flex flex-col items-start justify-end pt-0 px-0 pb-[3px]">
                     <div className="flex flex-col items-start justify-start gap-3.5">
-                      <div className="w-[15px] h-[15px] relative rounded-10xs border-darkslategray-300 border-[1px] border-solid box-border cursor-pointer z-[1]" />
-                      <div className="w-[15px] h-[15px] relative rounded-10xs border-darkslategray-300 border-[1px] border-solid box-border cursor-pointer z-[1]" />
-                      <div className="w-[15px] h-[15px] relative rounded-10xs border-darkslategray-300 border-[1px] border-solid box-border cursor-pointer z-[1]" />
+                      <div
+                        className="w-[15px] h-[15px] relative rounded-10xs border-darkslategray-300 border-[1px] border-solid box-border cursor-pointer z-[1]"
+                        onClick={() => handleLevelChange('Easy')}
+                      />
+                      <div
+                        className="w-[15px] h-[15px] relative rounded-10xs border-darkslategray-300 border-[1px] border-solid box-border cursor-pointer z-[1]"
+                        onClick={() => handleLevelChange('Medium')}
+                      />
+                      <div
+                        className="w-[15px] h-[15px] relative rounded-10xs border-darkslategray-300 border-[1px] border-solid box-border cursor-pointer z-[1]"
+                        onClick={() => handleLevelChange('Hard')}
+                      />
                     </div>
                   </div>
-                  <div className="flex flex-col items-start justify-start gap-[5.5px]">
-                    <div className="flex flex-row items-start justify-start py-0 pl-0 pr-[21px] cursor-pointer z-[1]">
-                      <div className="relative leading-[23px] inline-block min-w-[32px]">
-                        Easy
-                      </div>
+                </div>
+                <div className="flex flex-col items-start justify-start gap-[5.5px]">
+                  <div className="flex flex-row items-start justify-start py-0 pl-0 pr-[21px] cursor-pointer z-[1]">
+                    <div className="relative leading-[23px] inline-block min-w-[32px] " >
+                      Easy
                     </div>
-                    <div className="flex flex-row items-start justify-start py-0 px-0 cursor-pointer z-[1]">
-                      <div className="relative leading-[23px] inline-block min-w-[54px] shrink-0">
-                        Medium
-                      </div>
+                  </div>
+                  <div className="flex flex-row items-start justify-start py-0 px-0 cursor-pointer z-[1]">
+                    <div className="relative leading-[23px] inline-block min-w-[54px] shrink-0">
+                      Medium
                     </div>
-                    <div className="flex flex-row items-start justify-start py-0 pl-0 pr-[21px] cursor-pointer z-[1]">
-                      <div className="relative leading-[23px] inline-block min-w-[32px]">
-                        Hard
-                      </div>
+                  </div>
+                  <div className="flex flex-row items-start justify-start py-0 pl-0 pr-[21px] cursor-pointer z-[1]">
+                    <div className="relative leading-[23px] inline-block min-w-[32px]">
+                      Hard
                     </div>
                   </div>
                 </div>
@@ -179,6 +205,7 @@ const Search = ({ className = "" }) => {
 
 Search.propTypes = {
   className: PropTypes.string,
+  onFilterChange: PropTypes.func.isRequired,
 };
 
 export default Search;

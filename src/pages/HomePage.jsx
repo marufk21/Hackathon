@@ -1,21 +1,30 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FrameComponent6 from "../components/FrameComponent6";
 import Search from "../components/Search";
 import Card from "../components/Card";
 
-const ListPage = () => {
+const HomePage = () => {
   const navigate = useNavigate();
 
   const onGroupContainerClick = useCallback(() => {
     navigate("/admin");
   }, [navigate]);
 
+
+
+  const [filters, setFilters] = useState({
+    status: "All",
+    level: "All",
+    searchTerm: "",
+  });
+ 
+  const handleFilterChange = (filterData) => {
+    setFilters(filterData);
+  };
   return (
     <>
       <div className="w-full relative bg-white overflow-hidden flex flex-col items-start justify-start leading-[normal] tracking-[normal]">
-
-
         <section className="ml-[-1px] mb-[60px] self-stretch bg-darkslategray-300 flex flex-row items-start justify-start pt-[184px] px-36 pb-[93px] box-border relative gap-[52.3px] max-w-full mt-[-60px] text-left text-lg text-white font-poppins mq1125:pl-[72px] mq1125:pr-[72px] mq1125:box-border mq800:gap-[26px] mq800:pl-9 mq800:pr-9 mq800:pb-[60px] mq800:box-border">
           <div className="h-[625px] w-[1442px] relative bg-darkslategray-300 hidden max-w-full z-[0]" />
           <div className="h-[115.9px] w-[9.7px] relative bg-goldenrod-100 z-[1]" />
@@ -25,9 +34,10 @@ const ListPage = () => {
                 Accelerate Innovation with Global AI Challenges
               </h1>
               <div className="w-[531px] relative leading-[28px] font-medium text-whitesmoke-400 inline-block max-w-full z-[1]">
-                AI Challenges at DPhi simulate real-world problems. It is a great
-                place to put your AI/Data Science skills to test on diverse
-                datasets allowing you to foster learning through competitions.
+                AI Challenges at DPhi simulate real-world problems. It is a
+                great place to put your AI/Data Science skills to test on
+                diverse datasets allowing you to foster learning through
+                competitions.
               </div>
               <div
                 className="flex flex-row items-start justify-start cursor-pointer z-[1] text-center text-darkslategray-300"
@@ -121,8 +131,8 @@ const ListPage = () => {
         />
         <section className="self-stretch flex flex-row items-start justify-start py-0 px-0 box-border gap-[366px] max-w-full mt-[-60px] text-center text-5xl text-white font-poppins mq450:gap-[46px] mq1350:gap-[183px] mq1350:flex-wrap mq800:gap-[91px]">
           <div className="w-[1440px] flex flex-col items-start justify-start shrink-0 max-w-full">
-            <Search />
-            <Card />
+            <Search className="" onFilterChange={handleFilterChange} />
+            <Card className="" filters={filters} />
           </div>
         </section>
       </div>
@@ -130,4 +140,4 @@ const ListPage = () => {
   );
 };
 
-export default ListPage;
+export default HomePage;
