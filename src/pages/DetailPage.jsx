@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; 
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useCallback } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const DetailPage = ({className= ""}) => {
+const DetailPage = ({ className = "" }) => {
   const navigate = useNavigate();
-
-  const onGroupContainerClick = useCallback(() => {
-    navigate(`/detail-page/${index}`);
-  }, [navigate]);
-
-  const { index } = useParams(); 
+  const { index } = useParams();
   const [challenge, setChallenge] = useState(null);
 
   useEffect(() => {
@@ -22,15 +15,33 @@ const DetailPage = ({className= ""}) => {
     if (challenges.length > 0 && index < challenges.length) {
       setChallenge(challenges[index]);
     }
-  }, [index]); // Add index as a dependency
+  }, [index]);
+
+  const onEditClick = useCallback(() => {
+    navigate(`/edit-form/${index}`);
+  }, [navigate, index]);
+
+  const onDeleteClick = useCallback(() => {
+    // Retrieve existing challenges
+    const challenges = JSON.parse(localStorage.getItem("challenges")) || [];
+
+    // Remove the challenge from the array
+    if (index < challenges.length) {
+      challenges.splice(index, 1);
+      localStorage.setItem("challenges", JSON.stringify(challenges));
+
+      // Navigate back to the home page or any other page
+      navigate("/");
+    }
+  }, [index, navigate]);
 
   if (!challenge) {
-    return <div>Loading...</div>; // Show a loading state while data is being fetched
+    return <div>Loading...</div>;
   }
 
   return (
     <div className="w-full relative bg-white overflow-hidden flex flex-col items-start justify-start pt-0 px-0 pb-[19px] box-border leading-[normal] tracking-[normal]">
-      <section className="self-stretch bg-darkslategray-300 flex flex-col items-start justify-start pt-24 px-[126px] pb-[95px] box-border gap-[33px] max-w-full text-left text-sm text-black font-body-b3-regular mq450:pt-[62px] mq450:pb-[62px] mq450:box-border mq725:gap-4 mq725:pl-[31px] mq725:pr-[31px] mq725:box-border mq1050:pl-[63px] mq1050:pr-[63px] mq1050:box-border">
+      <section className="self-stretch bg-darkslategray-300 flex flex-col items-start justify-start pt-24 px-[126px] pb-[95px] box-border gap-[33px]      max-w-full text-left text-sm text-black font-body-b3-regular mq450:pt-[62px] mq450:pb-[62px] mq450:box-border mq725:gap-4 mq725:pl-[31px] mq725:pr-[31px] mq725:box-border mq1050:pl-[63px] mq1050:pr-[63px] mq1050:box-border">
         <div className="w-[1442px] h-[419px] relative bg-darkslategray-300 hidden max-w-full" />
         <div className="w-[818px] flex flex-col items-start justify-start gap-6 max-w-full">
           <div className="w-[472px] flex flex-row items-start justify-start py-0 px-1 box-border max-w-full">
@@ -90,10 +101,11 @@ const DetailPage = ({className= ""}) => {
                 <div className="self-stretch h-1 relative rounded-xl bg-dphigreen z-[2]" />
               </div>
             </div>
+            {/* Edit and Delete */}
             <div className="w-[200px] flex flex-row items-start justify-start gap-[18px] text-center text-sm text-white font-poppins">
               <div
                 className="flex flex-row items-start justify-start cursor-pointer z-[2]"
-                onClick={onGroupContainerClick}
+                onClick={onEditClick}
               >
                 <div className="rounded-3xs bg-dphigreen flex flex-row items-start justify-start pt-2.5 px-8 pb-[9px]">
                   <a className="[text-decoration:none] relative leading-[18px] font-semibold text-[inherit] inline-block min-w-[27px]">
@@ -101,7 +113,10 @@ const DetailPage = ({className= ""}) => {
                   </a>
                 </div>
               </div>
-              <div className="flex-1 rounded-3xs border-red border-[1.2px] border-solid flex flex-row items-start justify-start pt-2 pb-[7px] pl-[22px] pr-[21px] z-[2] text-red">
+              <div
+                className="flex-1 rounded-3xs border-red border-[1.2px] border-solid flex flex-row items-start justify-start pt-2 pb-[7px] pl-[22px] pr-[21px] z-[2] text-red cursor-pointer"
+                onClick={onDeleteClick}
+              >
                 <div className="relative leading-[18px] font-semibold inline-block min-w-[46px]">
                   Delete
                 </div>
@@ -124,3 +139,4 @@ DetailPage.propTypes = {
 };
 
 export default DetailPage;
+

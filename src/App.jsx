@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/admin" element={<AdminForm />} />
-        <Route path="/3" element={<EditForm />} />
+        <Route path="/edit-form/:index" element={<EditForm />} />
         <Route path="/detail-page/:index" element={<DetailPage />} />
       </Routes>
     </>
