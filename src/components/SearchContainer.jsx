@@ -24,7 +24,7 @@ const SearchContainer = ({ className = "" }) => {
           <h1 className="m-0 w-[353px] relative text-inherit leading-[40px] font-semibold font-[inherit] flex items-center justify-center shrink-0 max-w-full z-[1] mq450:text-3xl mq450:leading-[32px]">
             Explore Challenges
           </h1>
-        </div>
+        </div>``
         <form className="m-0 w-[964px] flex flex-col items-start justify-start gap-[41px] max-w-full mq800:gap-5">
           <div className="self-stretch flex flex-row items-start justify-center gap-[25px] max-w-full mq1125:flex-wrap">
             <div className="flex-1 shadow-[0px_4px_50px_rgba(110,_110,_110,_0.1)] rounded-xl bg-white overflow-hidden flex flex-row items-start justify-start pt-[15px] px-[38px] pb-[17px] box-border gap-3 min-w-[181px] max-w-full z-[1]">
@@ -56,6 +56,7 @@ const SearchContainer = ({ className = "" }) => {
               </div>
             </div>
           </div>
+          {/* Shows the Filters Tags when user filtrering t*/}
           <div className="w-[440px] flex flex-row items-start justify-center gap-[30px] max-w-full mq450:flex-wrap">
             <div className="w-[142px] rounded-11xl bg-ghostwhite-300 flex flex-row items-start justify-start pt-[11px] px-[21px] pb-3 box-border gap-[7px] min-w-[92px] z-[1]">
               <div className="h-10 w-[142px] relative rounded-11xl bg-ghostwhite-300 hidden" />
@@ -99,6 +100,7 @@ const SearchContainer = ({ className = "" }) => {
           </div>
         </form>
       </div>
+
       {isFilterOpen && (
         <PortalPopup
           overlayColor="rgba(113, 113, 113, 0.3)"

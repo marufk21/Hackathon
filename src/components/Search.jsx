@@ -3,7 +3,7 @@ import Filter from "./Filter";
 import PortalPopup from "./PortalPopup";
 import PropTypes from "prop-types";
 
-const FrameComponent5 = ({ className = "" }) => {
+const Search = ({ className = "" }) => {
   const [isFilterOpen, setFilterOpen] = useState(false);
 
   const openFilter = useCallback(() => {
@@ -67,8 +67,8 @@ const FrameComponent5 = ({ className = "" }) => {
   );
 };
 
-FrameComponent5.propTypes = {
+Search.propTypes = {
   className: PropTypes.string,
 };
 
-export default FrameComponent5;
+export default Search;

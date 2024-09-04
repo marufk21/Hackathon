@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const GroupComponent1 = ({ className = "" }) => {
+  const Card = ({ className = "" }) => {
   const navigate = useNavigate();
   const [challenges, setChallenges] = useState([]);
 
@@ -89,8 +89,8 @@ const GroupComponent1 = ({ className = "" }) => {
   );
 };
 
-GroupComponent1.propTypes = {
+Card.propTypes = {
   className: PropTypes.string,
 };
 
-export default GroupComponent1;
+export default Card;
