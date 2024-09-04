@@ -7,6 +7,7 @@ const Search = ({ className = '', onFilterChange }) => {
   const [selectedStatus, setSelectedStatus] = useState('All');
   const [selectedLevel, setSelectedLevel] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
+  const [tags, setTags] = useState(['Upcoming', 'Past', 'Easy']); // Default tags
 
   const openFilter = useCallback(() => {
     setFilterOpen(true);
@@ -18,13 +19,13 @@ const Search = ({ className = '', onFilterChange }) => {
 
   const handleStatusChange = (status) => {
     setSelectedStatus(status);
-    console.log('Status changed:', { status, level: selectedLevel, searchTerm });
+    updateTags(status, selectedLevel);
     onFilterChange({ status, level: selectedLevel, searchTerm });
   };
 
   const handleLevelChange = (level) => {
     setSelectedLevel(level);
-    console.log({status: selectedStatus, level, searchTerm })
+    updateTags(selectedStatus, level);
     onFilterChange({ status: selectedStatus, level, searchTerm });
   };
 
@@ -36,6 +37,17 @@ const Search = ({ className = '', onFilterChange }) => {
       level: selectedLevel,
       searchTerm: value,
     });
+  };
+
+  const updateTags = (status, level) => {
+    let newTags = [];
+    if (status === 'Upcoming' || status === 'Past') {
+      newTags.push(status);
+    }
+    if (level === 'Easy' || level === 'Medium' || level === 'Hard') {
+      newTags.push(level);
+    }
+    setTags(newTags);
   };
 
   return (
@@ -199,9 +211,22 @@ const Search = ({ className = '', onFilterChange }) => {
           </div>
         </PortalPopup>
       )}
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-2 mt-4">
+        {tags.map((tag) => (
+          <span key={tag} id="badge-dismiss-dark" className="inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-gray-800 bg-slate-400 rounded-xl dark:bg-gray-700 dark:text-gray-300">
+            {tag}
+            
+          </span>
+        ))}
+      </div>
+
     </>
   );
 };
+
+
 
 Search.propTypes = {
   className: PropTypes.string,

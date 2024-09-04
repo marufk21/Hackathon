@@ -129,7 +129,7 @@ const HomePage = () => {
           benefitIcon="/vector.svg"
           identificationCard="/identificationcard.svg"
         />
-        <section className="self-stretch flex flex-row items-start justify-start py-0 px-0 box-border gap-[366px] max-w-full mt-[-60px] text-center text-5xl text-white font-poppins mq450:gap-[46px] mq1350:gap-[183px] mq1350:flex-wrap mq800:gap-[91px]">
+        <section className="bg-darkslategray-400 self-stretch flex flex-row items-start justify-start py-0 px-0 box-border gap-[366px] max-w-full mt-[-60px] text-center text-5xl text-white font-poppins mq450:gap-[46px] mq1350:gap-[183px] mq1350:flex-wrap mq800:gap-[91px]">
           <div className="w-[1440px] flex flex-col items-start justify-start shrink-0 max-w-full">
             <Search className="" onFilterChange={handleFilterChange} />
             <Card className="" filters={filters} />
