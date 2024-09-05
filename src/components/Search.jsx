@@ -65,12 +65,14 @@ const Search = ({ className = '', onFilterChange }) => {
           <div className="flex-1 shadow-[0px_4px_50px_rgba(110,_110,_110,_0.1)] rounded-xl bg-white overflow-hidden flex flex-row items-start justify-start pt-[15px] px-[38px] pb-[17px] box-border gap-3 min-w-[181px] max-w-full z-[3]">
             <input
               type="text"
-              placeholder="Search..."
-              className="w-full px-2 py-1 border border-gray-300 rounded"
+              placeholder="Search"
+              className="w-full px-2 py-1 border-none rounded bg-transparent text-gray-800 placeholder-gray-500"
               value={searchTerm}
               onChange={handleSearchChange}
             />
+
           </div>
+
           <div
             className="w-[110px] rounded-xl bg-white border-whitesmoke-500 border-[1px] border-solid box-border overflow-hidden shrink-0 flex flex-row items-start justify-start py-2.5 pl-[22px] pr-[15px] cursor-pointer z-[3] text-black"
             onClick={openFilter}
@@ -84,6 +86,22 @@ const Search = ({ className = '', onFilterChange }) => {
                 src="/caret.svg"
               />
             </div>
+          </div>
+        </div>
+        {/* Tags */}
+        <div className='flex justify-center items-center '>
+          <div className="flex flex-wrap gap-4 mt-4 justify-center">
+            {tags.map((tag) => (
+              <span key={tag} id="badge-dismiss-dark" className="flex items-center justify-center h-[40px] w-[119px] text-center px-2 py-1 me-2 text-base font-normal text-gray-800 bg-slate-400 rounded-xl dark:bg-gray-700 dark:text-gray-300">
+                {tag}
+                <button type="button" className="inline-flex items-center p-1 ms-2 text-sm text-gray-400 bg-transparent rounded-sm hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-gray-300" data-dismiss-target="#badge-dismiss-dark" aria-label="Remove">
+                  <svg className="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                  </svg>
+                  <span className="sr-only">Remove badge</span>
+                </button>
+              </span>
+            ))}
           </div>
         </div>
       </div>
@@ -212,15 +230,8 @@ const Search = ({ className = '', onFilterChange }) => {
         </PortalPopup>
       )}
 
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 mt-4">
-        {tags.map((tag) => (
-          <span key={tag} id="badge-dismiss-dark" className="inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-gray-800 bg-slate-400 rounded-xl dark:bg-gray-700 dark:text-gray-300">
-            {tag}
-            
-          </span>
-        ))}
-      </div>
+
+
 
     </>
   );

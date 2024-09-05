@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const EditForm = ({ className = "" }) => {
   const navigate = useNavigate();
-  const { id } = useParams(); // Get the challenge ID from the URL parameters
+  const { id } = useParams(); 
   const [challengeName, setChallengeName] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -15,7 +15,7 @@ const EditForm = ({ className = "" }) => {
   useEffect(() => {
     // Fetch the challenge data based on the ID
     const existingChallenges = JSON.parse(localStorage.getItem("challenges")) || [];
-    console.log('Existing Challenges:', existingChallenges); // Debugging step
+    console.log('Existing Challenges:', existingChallenges); 
     const challenge = existingChallenges.find(challenge => challenge.id === id);
     if (challenge) {
       setChallengeName(challenge.challengeName);
@@ -25,13 +25,13 @@ const EditForm = ({ className = "" }) => {
       setImage(challenge.image);
       setLevelType(challenge.levelType);
     } else {
-      console.error('Challenge not found for ID:', id); // Debugging step
+      console.error('Challenge not found for ID:', id); 
     }
   }, [id]);
 
   const onSaveClick = useCallback(() => {
     const existingChallenges = JSON.parse(localStorage.getItem("challenges")) || [];
-    console.log('Before Update:', existingChallenges); // Debugging step
+    console.log('Before Update:', existingChallenges); 
     const updatedChallenges = existingChallenges.map(challenge =>
       challenge.id === id ? {
         ...challenge,
@@ -43,9 +43,8 @@ const EditForm = ({ className = "" }) => {
         levelType,
       } : challenge
     );
-    console.log('Updated Challenges:', updatedChallenges); // Debugging step
+    console.log('Updated Challenges:', updatedChallenges); 
 
-    // Save the updated challenges back to localStorage
     localStorage.setItem("challenges", JSON.stringify(updatedChallenges));
     navigate("/");
   }, [navigate, challengeName, startDate, endDate, description, image, levelType, id]);

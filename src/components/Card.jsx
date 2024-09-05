@@ -179,20 +179,17 @@ const Card = ({ className = "", filters }) => {
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="absolute top-[0px] left-[0px] rounded-t-mini rounded-b-none w-[354px] flex flex-row items-start justify-start bg-cover bg-no-repeat bg-[top] max-w-full z-[2]"
-                    style={{ backgroundImage: `url(${challenge.image})` }}
-                  >
+                  <div className="absolute top-[0px] left-[0px] rounded-t-mini rounded-b-none w-[354px] flex flex-row items-start justify-start bg-[url('/public/rectangle-6672@2x.png')] bg-cover bg-no-repeat bg-[top] max-w-full z-[2]">
                     <img
                       className="self-stretch w-[354px] relative rounded-t-mini rounded-b-none max-h-full object-cover hidden min-h-[174px] max-w-full"
-                      alt={challenge.challengeName}
-                      src={challenge.image}
+                      alt=""
+                      src="/rectangle-6672@2x.png"
                     />
                     <img
                       className="h-[174px] flex-1 relative max-w-full overflow-hidden z-[1]"
                       loading="lazy"
-                      alt={challenge.challengeName}
-                      src={challenge.imageOverlay}
+                      alt=""
+                      src="/rectangle-6673.svg"
                     />
                   </div>
                 </div>
