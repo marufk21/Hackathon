@@ -4,7 +4,6 @@ import HomePage from "./pages/HomePage";
 import AdminForm from "./pages/AdminForm";
 import EditForm from "./pages/EditForm";
 import DetailPage from "./pages/DetailPage";
-
 function App() {
   return (
     <>
